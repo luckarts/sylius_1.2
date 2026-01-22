@@ -1,0 +1,13 @@
+<?php
+
+return FriendsOfTwig\Twigcs\Config\Config::create()
+    ->setName('Sylius custom ruleset')
+    ->setSeverity('warning')
+    ->setReporter('console')
+    ->setRuleSet(FriendsOfTwig\Twigcs\Ruleset\Official::class)
+    ->addFinder(
+        FriendsOfTwig\Twigcs\Finder\TemplateFinder::create()
+            ->in(__DIR__ . '/app/Resources')
+            ->in(__DIR__ . '/src')
+    )
+;
