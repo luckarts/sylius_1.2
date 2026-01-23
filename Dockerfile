@@ -39,6 +39,10 @@ ARG UID=1000
 ARG GID=1000
 RUN usermod -u ${UID} www-data && groupmod -g ${GID} www-data
 
+# Copy and set entrypoint script
+COPY docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
+
+
 # Set working directory
 WORKDIR /var/www/html
 
