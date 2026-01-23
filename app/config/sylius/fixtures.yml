@@ -1,0 +1,344 @@
+# Fixtures FleuristeParis
+
+sylius_fixtures:
+    suites:
+        # Suite de base avec channel, locales, etc.
+        fleuriste_base:
+            listeners:
+                logger: ~
+
+            fixtures:
+                locale:
+                    options:
+                        locales:
+                            - 'fr_FR'
+
+                currency:
+                    options:
+                        currencies:
+                            - 'EUR'
+
+                geographical:
+                    options:
+                        countries:
+                            - 'FR'
+                            - 'US'
+                        zones:
+                            EU:
+                                name: "Europe"
+                                countries:
+                                    - 'FR'
+                            US:
+                                name: "United States of America"
+                                countries:
+                                    - 'US'
+
+                channel:
+                    options:
+                        custom:
+                            fleuriste_paris:
+                                name: "Fleuriste Paris"
+                                code: "FLEURISTE_PARIS"
+                                locales:
+                                    - 'fr_FR'
+                                currencies:
+                                    - 'EUR'
+                                default_locale: 'fr_FR'
+                                base_currency: 'EUR'
+                                enabled: true
+                                hostname: "localhost"
+                                contact_email: "contact@fleuriste-paris.fr"
+                                theme_name: ~
+
+                payment_method:
+                    options:
+                        custom:
+                            cash_on_delivery:
+                                code: "cash_on_delivery"
+                                name: "Paiement à la livraison"
+                                enabled: true
+                                channels:
+                                    - "FLEURISTE_PARIS"
+                            credit_card:
+                                code: "credit_card"
+                                name: "Carte bancaire"
+                                enabled: true
+                                channels:
+                                    - "FLEURISTE_PARIS"
+
+                shipping_method:
+                    options:
+                        custom:
+                            express_delivery:
+                                code: "express_delivery"
+                                name: "Livraison Express (24h)"
+                                enabled: true
+                                channels:
+                                    - "FLEURISTE_PARIS"
+                            standard_delivery:
+                                code: "standard_delivery"
+                                name: "Livraison Standard (48-72h)"
+                                channels:
+                                    - "FLEURISTE_PARIS"
+                            store_pickup:
+                                code: "store_pickup"
+                                name: "Retrait en boutique"
+                                channels:
+                                    - "FLEURISTE_PARIS"
+
+                admin_user:
+                    options:
+                        custom:
+                            -
+                                email: "admin@fleuriste-paris.fr"
+                                username: "admin"
+                                password: "admin123"
+                                enabled: true
+                                locale_code: "fr_FR"
+                                first_name: "Admin"
+                                last_name: "Fleuriste"
+
+                tax_category:
+                    options:
+                        custom:
+                            flowers:
+                                code: "flowers"
+                                name: "Fleurs et plantes"
+                            accessories:
+                                code: "accessories"
+                                name: "Accessoires"
+
+                tax_rate:
+                    options:
+                        custom:
+                            vat_flowers:
+                                code: "vat_flowers_10"
+                                name: "TVA Fleurs 10%"
+                                zone: "EU"
+                                category: "flowers"
+                                amount: 0.10
+                            vat_accessories:
+                                code: "vat_accessories_20"
+                                name: "TVA Accessoires 20%"
+                                zone: "EU"
+                                category: "accessories"
+                                amount: 0.20
+
+        # Suite taxons uniquement
+        fleuriste_taxons:
+            listeners:
+                logger: ~
+
+            fixtures:
+                taxon:
+                    options:
+                        custom:
+                            categories:
+                                name: "Catégories"
+                                code: "categories"
+                                slug: "categories"
+                                description: "Toutes nos catégories de bouquets"
+                                children:
+                                    roses:
+                                        name: "Roses"
+                                        code: "roses"
+                                        slug: "roses"
+                                        description: "Bouquets de roses"
+                                    mixed:
+                                        name: "Mixte"
+                                        code: "mixed"
+                                        slug: "mixed"
+                                        description: "Compositions mixtes"
+                                    funeral:
+                                        name: "Funéraire"
+                                        code: "funeral"
+                                        slug: "funeral"
+                                        description: "Compositions funéraires"
+                                    birth:
+                                        name: "Naissance"
+                                        code: "birth"
+                                        slug: "birth"
+                                        description: "Bouquets de naissance"
+                                    plants:
+                                        name: "Plantes"
+                                        code: "plants"
+                                        slug: "plants"
+                                        description: "Plantes et orchidées"
+
+                            occasions:
+                                name: "Occasions"
+                                code: "occasions"
+                                slug: "occasions"
+                                description: "Bouquets par occasion"
+                                children:
+                                    valentines_day:
+                                        name: "Saint-Valentin"
+                                        code: "valentines-day"
+                                        slug: "valentines-day"
+                                        description: "Bouquets romantiques"
+                                    birthday:
+                                        name: "Anniversaire"
+                                        code: "birthday"
+                                        slug: "birthday"
+                                        description: "Bouquets anniversaire"
+                                    mourning:
+                                        name: "Deuil"
+                                        code: "mourning"
+                                        slug: "mourning"
+                                        description: "Compositions de deuil"
+                                    birth_occasion:
+                                        name: "Naissance"
+                                        code: "birth-occasion"
+                                        slug: "birth-occasion"
+                                        description: "Célébrer une naissance"
+                                    thank_you:
+                                        name: "Remerciement"
+                                        code: "thank-you"
+                                        slug: "thank-you"
+                                        description: "Dire merci"
+                                    marriage_proposal:
+                                        name: "Demande en Mariage"
+                                        code: "marriage-proposal"
+                                        slug: "marriage-proposal"
+                                        description: "Demande en mariage"
+
+        # Suite produits bouquets
+        fleuriste_products:
+            listeners:
+                logger: ~
+
+            fixtures:
+                bouquet_product:
+                    options:
+                        custom:
+                            winter_glow:
+                                code: "winter-glow-january"
+                                name: "Éclat d'Hiver"
+                                description: "Un mélange raffiné de fleurs fraîches de saison pour illuminer les journées de janvier."
+                                price: 40.00
+                                taxon: "mixed"
+                                occasion: "thank-you"
+                                availability: "in_stock"
+                                images:
+                                    - { path: "/var/www/html/app/Resources/fixtures/saison.png", type: "main" }
+
+                            birthday_bouquet:
+                                code: "birthday-bouquet"
+                                name: "Célébration Rayonnante"
+                                description: "Une explosion de couleurs et de joie pour fêter une année de plus en beauté."
+                                price: 50.00
+                                taxon: "mixed"
+                                occasion: "birthday"
+                                availability: "in_stock"
+                                images:
+                                    - { path: "/var/www/html/app/Resources/fixtures/anniversaire.png", type: "main" }
+
+                            wedding_bouquet:
+                                code: "wedding-bouquet"
+                                name: "Promesse Éternelle"
+                                description: "Un bouquet romantique et sophistiqué, conçu pour accompagner le plus beau jour de votre vie."
+                                price: 80.00
+                                taxon: "roses"
+                                occasion: "marriage-proposal"
+                                availability: "in_stock"
+                                images:
+                                    - { path: "/var/www/html/app/Resources/fixtures/Mariage.png", type: "main" }
+
+                            first_date_bouquet:
+                                code: "first-date-bouquet"
+                                name: "Premier Charme"
+                                description: "Délicat et élégant, le bouquet idéal pour créer une première impression inoubliable."
+                                price: 45.00
+                                taxon: "roses"
+                                occasion: "valentines-day"
+                                availability: "in_stock"
+                                images:
+                                    - { path: "/var/www/html/app/Resources/fixtures/date.png", type: "main" }
+
+                            birth_bouquet:
+                                code: "birth-bouquet-girl"
+                                name: "Douce Aurore"
+                                description: "Des tons tendres et poétiques pour célébrer l'arrivée d'une petite princesse."
+                                price: 45.00
+                                taxon: "birth"
+                                occasion: "birth-occasion"
+                                availability: "in_stock"
+                                images:
+                                    - { path: "/var/www/html/app/Resources/fixtures/Naissance.png", type: "main" }
+
+                            funeral_bouquet:
+                                code: "funeral-bouquet"
+                                name: "Hommage et Paix"
+                                description: "Une composition sobre et digne pour exprimer vos condoléances et votre soutien."
+                                price: 60.00
+                                taxon: "funeral"
+                                occasion: "mourning"
+                                availability: "in_stock"
+                                images:
+                                    - { path: "/var/www/html/app/Resources/fixtures/deuil.png", type: "main" }
+
+                            roses_3:
+                                code: "roses-3-trio"
+                                name: "Trio de Tendresse"
+                                description: "Parfait pour une attention délicate."
+                                price: 20.00
+                                taxon: "roses"
+                                occasion: "valentines-day"
+                                availability: "in_stock"
+                                images:
+                                    - { path: "/var/www/html/app/Resources/fixtures/3_roses_rouge.png", type: "main" }
+
+                            roses_5:
+                                code: "roses-5-quintessence"
+                                name: "Quintessence Florale"
+                                description: "Un équilibre parfait entre élégance et simplicité."
+                                price: 30.00
+                                taxon: "roses"
+                                occasion: "thank-you"
+                                availability: "in_stock"
+                                images:
+                                    - { path: "/var/www/html/app/Resources/fixtures/5_roses_rouge.png", type: "main" }
+
+                            roses_10:
+                                code: "roses-10-passion"
+                                name: "L'Éclat Passion"
+                                description: "Un bouquet généreux pour déclarer son admiration."
+                                price: 50.00
+                                taxon: "roses"
+                                occasion: "valentines-day"
+                                availability: "in_stock"
+                                images:
+                                    - { path: "/var/www/html/app/Resources/fixtures/10roses.png", type: "main" }
+
+                            unique_creation:
+                                code: "unique-creation-gemini1"
+                                name: "Inspiration du Moment"
+                                description: "Une création unique de nos fleuristes, selon l'inspiration du jour."
+                                price: 55.00
+                                taxon: "mixed"
+                                occasion: "thank-you"
+                                availability: "in_stock"
+                                images:
+                                    - { path: "/var/www/html/app/Resources/fixtures/Gemini_Generated_Image_2rvii02rvii02rvi.png", type: "main" }
+
+                            floral_dream:
+                                code: "floral-dream-gemini2"
+                                name: "Rêve Floral"
+                                description: "Laissez-vous transporter par cette composition onirique et colorée."
+                                price: 65.00
+                                taxon: "mixed"
+                                occasion: "birthday"
+                                availability: "in_stock"
+                                images:
+                                    - { path: "/var/www/html/app/Resources/fixtures/Gemini_Generated_Image_bno0obno0obno0ob.png", type: "main" }
+
+                            exotic_escape:
+                                code: "exotic-escape-gemini3"
+                                name: "Escale Exotique"
+                                description: "Un voyage des sens avec cette sélection de fleurs tropicales et vibrantes."
+                                price: 70.00
+                                taxon: "plants"
+                                occasion: "thank-you"
+                                availability: "in_stock"
+                                images:
+                                    - { path: "/var/www/html/app/Resources/fixtures/Gemini_Generated_Image_rtv0ihrtv0ihrtv0.png", type: "main" }

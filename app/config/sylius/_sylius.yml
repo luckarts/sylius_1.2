@@ -5,3 +5,17 @@ sylius_product:
         product:
             classes:
                 model: AppBundle\Entity\Product
+
+# Surcharge de la grille admin des produits pour utiliser fr_FR
+sylius_grid:
+    grids:
+        sylius_admin_product:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: AppBundle\Entity\Product
+                    repository:
+                        method: createListQueryBuilder
+                        arguments:
+                            - 'fr_FR'
+                            - $taxonId
