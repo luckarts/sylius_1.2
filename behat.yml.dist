@@ -6,6 +6,7 @@ default:
         FriendsOfBehat\ContextServiceExtension:
             imports:
                 - "vendor/sylius/sylius/src/Sylius/Behat/Resources/config/services.xml"
+                - "tests/Behat/Resources/config/services.xml"
 
         FriendsOfBehat\SuiteSettingsExtension:
             paths:
@@ -20,6 +21,7 @@ cached:
         FriendsOfBehat\ContextServiceExtension:
             imports:
                 - "vendor/sylius/sylius/src/Sylius/Behat/Resources/config/services.xml"
+                - "tests/Behat/Resources/config/services.xml"
 
         Behat\MinkExtension:
             files_path: "%paths.base%/vendor/sylius/sylius/src/Sylius/Behat/Resources/fixtures/"
