@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+
+# Docker
+.docker
+docker-compose*.yml
+Dockerfile
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Dependencies
+/vendor
+/node_modules
+
+# Logs and cache
+/var/cache/*
+!/var/cache/.gitkeep
+/var/logs/*
+!/var/logs/.gitkeep
+/var/sessions/*
+!/var/sessions/.gitkeep
+
+# Tests
+/features
+/spec
+behat.yml*
+phpspec.yml*
+.travis.yml
+
+# Build
+gulpfile.babel.js
+package.json
+yarn.lock

@@ -1,0 +1,55 @@
+# Dockerfile de développement pour Sylius AcmeStore
+FROM php:7.4-fpm
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    libicu-dev \
+    unzip \
+    nodejs \
+    npm \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions required by Sylius
+RUN docker-php-ext-configure intl \
+    && docker-php-ext-install -j$(nproc) \
+    pdo_mysql \
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    gd \
+    intl \
+    zip \
+    opcache
+
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Install Yarn
+RUN npm install -g yarn
+
+# Enable Xdebug for development (optionnel)
+RUN pecl install xdebug-3.1.5 \
+    && docker-php-ext-enable xdebug
+
+# Configuration Xdebug
+RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Set permissions for dev
+RUN chown -R www-data:www-data /var/www
+
+# Expose port 9000 for PHP-FPM
+EXPOSE 9000
+
+CMD ["php-fpm"]

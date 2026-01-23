@@ -1,43 +1,65 @@
-  {
-    "dependencies": {
+{
+  "name": "acme-store-front",
+  "version": "1.0.0",
+  "description": "AcmeStore Frontend Assets",
+  "private": true,
+  "dependencies": {
     "babel-runtime": "^6.26.0",
-    "jquery": "^3.2.0",
-    "lightbox2": "^2.9.0",
-    "semantic-ui-css": "^2.2.0"
+    "jquery": "^3.6.0",
+    "lightbox2": "^2.11.3",
+    "semantic-ui-css": "^2.4.1",
+    "dropzone": "^5.9.3",
+    "jquery-validation": "^1.19.5",
+    "select2": "^4.0.13",
+    "nouislider": "^15.6.1",
+    "autosize": "^6.0.1",
+    "accounting": "^0.4.1",
+    "sweetalert2": "^11.7.3"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.12.0",
-    "gulp": "^4.0.0",
-    "gulp-chug": "^0.5",
-    "gulp-concat": "^2.6.0",
-    "gulp-debug": "^2.1.2",
-    "gulp-if": "^2.0.0",
-    "gulp-livereload": "^4.0.1",
-    "gulp-order": "^1.1.1",
-    "gulp-sass": "^4.0.1",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^1.5.1",
-    "gulp-uglifycss": "^1.0.5",
-    "merge-stream": "^1.0.0",
-    "upath": "^1.1.0",
-    "yargs": "^6.4.0"
+    "eslint": "^8.36.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "gulp": "^4.0.2",
+    "gulp-chug": "^0.5.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-debug": "^4.0.0",
+    "gulp-if": "^3.0.0",
+    "gulp-livereload": "^4.0.2",
+    "gulp-order": "^1.2.0",
+    "gulp-sass": "^5.1.0",
+    "sass": "^1.60.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglifycss": "^1.1.0",
+    "merge-stream": "^2.0.0",
+    "upath": "^2.0.1",
+    "yargs": "^17.7.1"
   },
   "scripts": {
-    "build": "gulp",
-    "gulp": "gulp",
+    "build": "gulp build",
+    "build:admin": "gulp admin",
+    "build:shop": "gulp shop",
+    "watch": "gulp watch",
+    "watch:admin": "gulp admin-watch",
+    "watch:shop": "gulp shop-watch",
     "lint": "yarn lint:js",
-    "lint:js": "eslint gulpfile.babel.js"
+    "lint:js": "eslint gulpfile.babel.js",
+    "docker:build": "docker-compose run --rm node yarn build",
+    "docker:watch": "docker-compose run --rm node yarn watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sylius/Sylius.git"
   },
-  "author": "Paweł Jędrzejewski",
-  "license": "MIT"
+  "author": "AcmeStore Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0",
+    "yarn": ">=1.22.0"
+  }
 }

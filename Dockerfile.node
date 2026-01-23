@@ -1,0 +1,17 @@
+# Dockerfile for Node.js (Asset Building)
+FROM node:16-alpine
+
+# Install build dependencies
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    git \
+    bash
+
+# Set working directory
+WORKDIR /app
+
+# Keep container running for development
+# Dependencies will be installed via volumes at runtime
+CMD ["sh", "-c", "tail -f /dev/null"]

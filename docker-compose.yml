@@ -1,0 +1,115 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:5.7
+    container_name: sylius_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-sylius}
+      MYSQL_USER: ${MYSQL_USER:-sylius}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-sylius}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - sylius_network
+
+  # PHP-FPM Application
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sylius_php
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./var/cache:/var/www/html/var/cache
+      - ./var/logs:/var/www/html/var/logs
+    environment:
+      SYLIUS_DATABASE_DRIVER: ${SYLIUS_DATABASE_DRIVER:-pdo_mysql}
+      SYLIUS_DATABASE_HOST: ${SYLIUS_DATABASE_HOST:-mysql}
+      SYLIUS_DATABASE_PORT: ${SYLIUS_DATABASE_PORT:-3306}
+      SYLIUS_DATABASE_NAME: ${SYLIUS_DATABASE_NAME:-sylius}
+      SYLIUS_DATABASE_USER: ${SYLIUS_DATABASE_USER:-sylius}
+      SYLIUS_DATABASE_PASSWORD: ${SYLIUS_DATABASE_PASSWORD:-sylius}
+      SYLIUS_MAILER_TRANSPORT: ${SYLIUS_MAILER_TRANSPORT:-smtp}
+      SYLIUS_MAILER_HOST: ${SYLIUS_MAILER_HOST:-mailhog}
+      SYLIUS_MAILER_PORT: ${SYLIUS_MAILER_PORT:-1025}
+      SYLIUS_MAILER_USER: ${SYLIUS_MAILER_USER:-null}
+      SYLIUS_MAILER_PASSWORD: ${SYLIUS_MAILER_PASSWORD:-null}
+      SYLIUS_SECRET: ${SYLIUS_SECRET:-CHANGE_ME_TO_RANDOM_SECRET}
+      SYLIUS_APP_DEV_PERMITTED: ${SYLIUS_APP_DEV_PERMITTED:-1}
+    depends_on:
+      - mysql
+    networks:
+      - sylius_network
+
+  # Nginx Web Server
+  nginx:
+    image: nginx:alpine
+    container_name: sylius_nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - sylius_network
+
+  # Node.js for Frontend Assets
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: sylius_node
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - node_modules:/app/node_modules
+    command: >
+      sh -c "echo 'Node container ready' && tail -f /dev/null"
+    networks:
+      - sylius_network
+
+  # MailHog (for testing emails)
+  mailhog:
+    image: mailhog/mailhog
+    container_name: sylius_mailhog
+    restart: unless-stopped
+    ports:
+      - "8025:8025"  # Web UI
+      - "1025:1025"  # SMTP
+    networks:
+      - sylius_network
+
+  # Selenium for Behat @javascript tests
+  selenium:
+    image: selenium/standalone-chrome:latest
+    container_name: sylius_selenium
+    restart: unless-stopped
+    ports:
+      - "4444:4444"
+      - "7900:7900"  # VNC server (for debugging)
+    volumes:
+      - /dev/shm:/dev/shm
+    networks:
+      - sylius_network
+
+volumes:
+  mysql_data:
+    driver: local
+  node_modules:
+    driver: local
+
+networks:
+  sylius_network:
+    driver: bridge
