@@ -1,0 +1,108 @@
+// app/Resources/assets/shop/scss/components/_product-card.scss
+
+.product-card {
+  position: relative;
+  border-radius: $product-card-border-radius; // 20px
+  overflow: hidden;
+  background: $color-surface;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); // Soft shadow
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  // Image Container
+  .image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; // 1:1 Aspect Ratio
+    background-color: $color-palette-gray-100;
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    // "Like" Heart Icon (Top Right or Bottom Right based on design, 
+    // placing it bottom right of image as seen in some modern designs 
+    // or keep it standard top right. Design shows bottom right of text area? 
+    // Let's look at the image again. 
+    // Looking at the uploaded image: The heart is in the bottom right of the WHITE card area, next to the price/name.
+    // So we don't put it here.
+  }
+
+  // Card Content
+  .content {
+    padding: $spacing-md;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: $spacing-xs;
+
+      .title {
+        font-family: 'Inter', sans-serif; // Assuming fonts
+        font-weight: 600;
+        font-size: 1rem;
+        color: $color-text-primary;
+        text-decoration: none;
+        margin-right: $spacing-xs;
+        line-height: 1.4;
+
+        // Limit to 2 lines
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2; // Standard property
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+
+        &:hover {
+          color: $color-primary;
+        }
+      }
+
+      .wishlist-icon {
+        color: $color-palette-gray-300; // Grey outline heart
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: color 0.2s ease, transform 0.2s ease;
+
+        &:hover {
+          color: $color-palette-purple-700; // Purple filled heart
+          transform: scale(1.1);
+
+          // Switch to filled heart on hover (Semantic UI icon code)
+          &::before {
+            content: "\f004";
+          }
+        }
+      }
+    }
+
+    .price {
+      font-weight: 700;
+      color: $color-palette-purple-700;
+      font-size: 1.1rem;
+      margin-top: auto; // Push to bottom
+    }
+
+    // Rating/Reviews if needed? Design shows rating stars or just clean look.
+    // Keeping it simple as per image.
+  }
+}

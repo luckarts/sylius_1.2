@@ -146,6 +146,22 @@ clean: down ## Nettoie complètement le projet
 clean-assets: ## Nettoie les assets compilés
 	rm -rf web/assets/admin web/assets/shop node_modules
 
+## —— Development Workflow ——————————————————————————————————
+dev: up ## Lance l'environnement de développement complet
+	@echo "✅ Environnement de développement lancé !"
+	@echo "🌐 Application: http://localhost:8080"
+	@echo ""
+	@echo "📦 Lancer le watch des assets dans un autre terminal:"
+	@echo "   make assets-watch"
+
+dev-watch: ## Lance l'environnement + watch des assets en arrière-plan
+	@$(MAKE) up
+	@echo "🚀 Démarrage du watch des assets en arrière-plan..."
+	@$(DOCKER) exec -d $(NODE_CONTAINER) sh -c "yarn install && yarn watch"
+	@echo "✅ Environnement complet lancé !"
+	@echo "🌐 Application: http://localhost:8080"
+	@echo "📦 Assets en mode watch (arrière-plan)"
+
 dev-stop: ## Arrête l'environnement de développement
 	$(DOCKER_COMPOSE) stop $(NODE_CONTAINER)
 	$(DOCKER_COMPOSE) stop

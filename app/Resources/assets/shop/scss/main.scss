@@ -1,0 +1,232 @@
+
+// Core
+@import 'variables';
+@import 'mixins';
+
+// Components
+@import 'components/product-grid';
+@import 'components/navbar';
+@import 'components/product-card';
+@import 'components/layout';
+
+// Theme Initialization
+:root {
+  @include theme-vars(light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include theme-vars(dark);
+  }
+}
+
+.dark-mode {
+  @include theme-vars(dark);
+}
+.ui.four.cards > .card{
+  width:100%;
+}
+// Custom Container for Product Listing
+.product-listing-container {
+  max-width: 100%;
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+
+
+}
+
+// Grid Layout for Cards
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-lg;
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+i.icon {
+  height: auto;
+}
+
+// Layout enhancements
+.product-index {
+  padding: $spacing-sm 0;
+}
+
+// Sorting toolbar
+.product-sorting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-sm $spacing-md;
+  background: white;
+  border-radius: $product-card-border-radius;
+  margin-bottom: $spacing-md;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  &__results {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  &__options {
+    display: flex;
+    gap: $spacing-sm;
+    align-items: center;
+
+    .dropdown {
+      min-width: 150px;
+    }
+  }
+}
+
+// Product detail enhancements
+.product-detail {
+  &__gallery {
+    position: relative;
+
+    .main-image {
+      width: 100%;
+      border-radius: $product-card-border-radius;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+
+    .thumbnails {
+      display: flex;
+      gap: $spacing-xs;
+      margin-top: $spacing-sm;
+
+      .thumbnail {
+        width: 80px;
+        height: 80px;
+        border-radius: $product-card-border-radius;
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: border-color 0.2s ease;
+
+        &:hover,
+        &.active {
+          border-color: $color-primary;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  &__info {
+    padding: $spacing-md;
+
+    .product-name {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: $spacing-sm;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      color: $color-primary;
+      font-weight: 700;
+      margin-bottom: $spacing-md;
+
+      .original-price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 1rem;
+        margin-right: $spacing-xs;
+      }
+    }
+
+    .product-description {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    align-items: center;
+
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+
+      .input {
+        width: 80px;
+      }
+    }
+  }
+}
+
+// Availability badge
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  &--in-stock {
+    background-color: rgba($color-success, 0.1);
+    color: $color-success;
+  }
+
+  &--out-of-stock {
+    background-color: rgba(#db2828, 0.1);
+    color: #db2828;
+  }
+
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: $spacing-xs;
+    background-color: currentColor;
+  }
+}
+
+// Breadcrumb styling
+.product-breadcrumb {
+  padding: $spacing-sm 0;
+
+  .breadcrumb {
+    .section {
+      color: #666;
+
+      &.active {
+        color: #333;
+        font-weight: 500;
+      }
+    }
+  }
+}

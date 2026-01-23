@@ -1,0 +1,45 @@
+.product-grid {
+  @include responsive-grid(4, 3, 1);
+  padding: $spacing-md;
+  background-color: $color-background;
+
+  &--loading {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: $spacing-lg;
+    color: #666;
+  }
+}
+
+// Override Sylius default card grid
+.three.cards,
+.four.cards {
+  @include responsive-grid(4, 3, 1);
+  margin: 0;
+
+  > .card {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+// Pagination styling
+.product-pagination {
+  display: flex;
+  justify-content: center;
+  padding: $spacing-md 0;
+
+  .pagination.menu {
+    .item {
+      &.active {
+        background-color: $color-primary;
+        color: white;
+      }
+    }
+  }
+}

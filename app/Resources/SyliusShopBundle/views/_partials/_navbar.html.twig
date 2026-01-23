@@ -1,0 +1,37 @@
+<div class="custom-navbar">
+	<div class="left">
+		<a href="{{ path('sylius_shop_homepage') }}" class="logo-link">
+			<img src="{{ asset('assets/shop/img/logo.png') }}" alt="Sylius" class="small image logo-img">
+		</a>
+	</div>
+
+	<div class="right">
+		<a href="{{ path('sylius_shop_cart_summary') }}" class="cart">
+			<i class="shopping cart icon"></i>
+		</a>
+
+		{% if app.user %}
+			<span class="user-greeting">Hello,
+				{{ app.user.username }}</span>
+			<a href="{{ path('sylius_shop_account_dashboard') }}" class="button icon btn">
+				<i class="user icon"></i>
+			</a>
+			<a href="{{ path('sylius_shop_logout') }}" class="button icon btn">
+				<i class="sign out icon"></i>
+			</a>
+		{% else %}
+			<a href="{{ path('sylius_shop_register') }}" class="button btn signup">
+				<i class="pencil icon"></i>
+				Sign up
+			</a>
+			<a href="{{ path('sylius_shop_login') }}" class="button btn signin">
+				<i class="arrow right icon"></i>
+				Sign In
+			</a>
+		{% endif %}
+
+		<div class="dots">
+			<i class="ellipsis vertical icon"></i>
+		</div>
+	</div>
+</div>
