@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults public="true" />
+
+        <service id="app.behat.context.ui.shop.catalog" class="App\Tests\Behat\Context\Ui\Shop\CatalogContext">
+            <argument type="service" id="behat.mink.default_session" />
+            <tag name="fob.context_service" />
+        </service>
+    </services>
+</container>

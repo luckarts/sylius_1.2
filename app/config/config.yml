@@ -10,6 +10,8 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: sylius/_sylius.yml }
+    - { resource: sylius/fixtures.yml }
 
 parameters:
     locale: en_US

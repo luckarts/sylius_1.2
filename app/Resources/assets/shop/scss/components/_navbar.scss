@@ -1,0 +1,122 @@
+// Navbar Styles
+.custom-navbar {
+    background-color: $navbar-background;
+    padding: $navbar-padding-y $navbar-padding-x;
+    height: $navbar-height;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: $navbar-shadow;
+    position: relative;
+    z-index: $z-index-navbar;
+
+    .left {
+        display: flex;
+        align-items: center;
+        gap: $navbar-gap;
+    }
+
+    .logo-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.02);
+        }
+    }
+
+    .logo-img {
+        height: $navbar-logo-height;
+        width: auto;
+    }
+
+    .right {
+        display: flex;
+        align-items: center;
+        gap: $navbar-gap;
+    }
+
+    // Navigation Links (if added later)
+    .link {
+        color: $navbar-text-color;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: $navbar-text-color-hover;
+        }
+    }
+
+    // Cart Icon
+    .cart {
+        color: $navbar-cart-color;
+        font-size: $navbar-cart-size;
+        margin-right: $navbar-cart-margin;
+        cursor: pointer;
+        transition: transform 0.2s ease, color 0.2s ease;
+        position: relative;
+
+        &:hover {
+            transform: scale(1.1);
+            color: $color-primary;
+        }
+    }
+
+    .user-greeting {
+        color: $navbar-text-color;
+        margin-right: $navbar-item-margin;
+        font-weight: 500;
+    }
+
+    .btn {
+        padding: 8px 24px;
+        border-radius: $navbar-btn-radius;
+        font-weight: $navbar-btn-font-weight;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        cursor: pointer;
+
+        &.signin {
+            background: $navbar-btn-signin-bg;
+            color: $navbar-btn-signin-text;
+            border: $navbar-btn-signin-border;
+            box-shadow: 0 4px 10px rgba($color-primary, 0.3);
+
+            &:hover {
+                background: $navbar-btn-signin-bg-hover;
+                box-shadow: 0 6px 15px rgba($color-primary, 0.4);
+                transform: translateY(-1px);
+                text-decoration: none;
+            }
+        }
+
+        &.signup {
+            background: transparent;
+            color: $navbar-btn-signup-text;
+            border: $navbar-btn-signup-border;
+
+            &:hover {
+                background: $navbar-btn-signup-bg-hover;
+                color: $navbar-btn-signup-text;
+                transform: translateY(-1px);
+            }
+        }
+    }
+
+    .dots {
+        color: $navbar-text-color;
+        cursor: pointer;
+        margin-left: $navbar-item-margin;
+
+        &:hover {
+            color: $navbar-text-color-hover;
+        }
+    }
+}

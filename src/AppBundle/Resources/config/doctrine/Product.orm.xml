@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="AppBundle\Entity\Product" table="sylius_product">
+        <field name="occasion" type="string" length="100" nullable="true"/>
+        <field name="availability" type="string" length="50">
+            <options>
+                <option name="default">en_stock</option>
+            </options>
+        </field>
+    </entity>
+
+</doctrine-mapping>

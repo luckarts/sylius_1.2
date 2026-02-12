@@ -31,3 +31,22 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    # Bouquet Product Fixture Factory
+    AppBundle\Fixture\Factory\BouquetProductExampleFactory:
+        arguments:
+            $productFactory: '@sylius.factory.product'
+            $productVariantFactory: '@sylius.factory.product_variant'
+            $productImageFactory: '@sylius.factory.product_image'
+            $taxonRepository: '@sylius.repository.taxon'
+            $channelRepository: '@sylius.repository.channel'
+            $slugGenerator: '@sylius.generator.slug'
+            $imageUploader: '@sylius.image_uploader'
+
+    # Bouquet Product Fixture
+    AppBundle\Fixture\BouquetProductFixture:
+        arguments:
+            $objectManager: '@doctrine.orm.entity_manager'
+            $exampleFactory: '@AppBundle\Fixture\Factory\BouquetProductExampleFactory'
+        tags:
+            - { name: sylius_fixtures.fixture }

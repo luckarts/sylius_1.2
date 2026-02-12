@@ -11,12 +11,21 @@
 
 declare(strict_types=1);
 
+use Doctrine\Common\Inflector\Inflector;
 use Sylius\Bundle\CoreBundle\Application\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class AppKernel extends Kernel
 {
+    public function boot(): void
+    {
+        Inflector::rules('plural', [
+            'irregular' => ['taxon' => 'taxons'],
+        ]);
+
+        parent::boot();
+    }
     /**
      * {@inheritdoc}
      */

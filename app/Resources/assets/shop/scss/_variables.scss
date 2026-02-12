@@ -1,0 +1,134 @@
+// ---------------------------------------------------------------------------
+// GLOBAL VARIABLES
+// ---------------------------------------------------------------------------
+
+// 1. Primitive Colors (Palette)
+// -------------------------------------------------------------------------
+// Brand Colors (extracted from 'Bouquet Passion' design)
+$color-palette-purple-900: #4a148c; // Deep Purple (Price, Heading)
+$color-palette-purple-700: #6a1b9a; // Primary Button Start
+$color-palette-purple-500: #8e24aa; // Primary Button End (Gradient)
+$color-palette-purple-300: #ba68c8; // Lighter touches
+$color-palette-purple-200: #ce93d8; // Light purple (borders)
+$color-palette-purple-100: #e1bee7; // Icons/Background accents
+$color-palette-purple-50: #f3e5f5; // Very light background
+
+$color-palette-pink-500: #e91e63; // Rose accent
+$color-palette-gold-400: #ffca28; // Stars
+
+$color-palette-gray-100: #f9fafb;
+$color-palette-gray-300: #e0e0e0;
+$color-palette-gray-700: #616161;
+$color-palette-gray-900: #212121;
+$color-palette-white: #ffffff;
+
+// 2. Semantic Colors (Brand & UI)
+// -------------------------------------------------------------------------
+$color-primary: $color-palette-purple-700;
+$color-secondary: $color-palette-purple-100;
+$color-accent: $color-palette-pink-500;
+$color-warning: $color-palette-gold-400;
+
+$color-background: $color-palette-gray-100;
+$color-surface: $color-palette-white;
+$color-shadow: rgba(74, 20, 140, 0.1); // Purple-tinted shadow
+$color-overlay-bg: rgba(0, 0, 0, 0.6); // Overlay background
+$color-success: #21ba45; // Green for success states
+
+$color-text-primary: $color-palette-gray-900;
+$color-text-secondary: $color-palette-gray-700;
+$color-text-brand: $color-palette-purple-900;
+$color-text-inverse: $color-palette-white;
+
+// 3. Spacing Scale
+// -------------------------------------------------------------------------
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 48px;
+
+// 4. Breakpoints
+// -------------------------------------------------------------------------
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 992px;
+
+// 5. Z-Indexes
+// -------------------------------------------------------------------------
+$z-index-navbar: 1000;
+
+// 6. Theming System
+// -------------------------------------------------------------------------
+$themes: (
+  light: (primary: $color-palette-purple-700,
+    secondary: $color-palette-pink-500,
+    background: $color-palette-gray-100,
+    surface: $color-palette-white,
+    text: $color-palette-gray-900,
+    text-muted: $color-palette-gray-700,
+    border: $color-palette-gray-300,
+    success: $color-success,
+    warning: $color-warning,
+    error: #db2828 // Standardize error color
+  ),
+  dark: (primary: $color-palette-purple-300,
+    secondary: $color-palette-pink-500,
+    background: #121212,
+    surface: #1e1e1e,
+    text: $color-palette-white,
+    text-muted: #b0bec5,
+    border: #333333,
+    success: #81c784,
+    warning: $color-palette-gold-400,
+    error: #e57373)
+);
+
+// ---------------------------------------------------------------------------
+// COMPONENT VARIABLES
+// ---------------------------------------------------------------------------
+
+// Navbar
+// -------------------------------------------------------------------------
+// Using a clean white navbar with purple branding
+$navbar-background: $color-palette-white;
+$navbar-padding-y: 15px;
+$navbar-padding-x: $spacing-lg;
+$navbar-shadow: 0 4px 12px $color-shadow;
+$navbar-height: 80px;
+
+$navbar-logo-height: 45px;
+$navbar-logo-margin: $spacing-lg;
+
+// Links
+$navbar-text-color: $color-text-secondary;
+$navbar-text-color-hover: $color-palette-purple-700;
+$navbar-gap: $spacing-lg;
+
+// Navbar Buttons
+$navbar-btn-radius: 30px; // Pill shape to match design
+$navbar-btn-font-weight: 600;
+
+// "Sign In" - Solid Purple (Primary)
+$navbar-btn-signin-bg: linear-gradient(135deg, $color-palette-purple-700, $color-palette-purple-500);
+$navbar-btn-signin-bg-hover: linear-gradient(135deg, $color-palette-purple-900, $color-palette-purple-700);
+$navbar-btn-signin-text: $color-text-inverse;
+$navbar-btn-signin-border: none;
+
+// "Sign Up" - Transparent with Border
+$navbar-btn-signup-bg: transparent;
+$navbar-btn-signup-bg-hover: rgba($color-palette-purple-700, 0.05);
+$navbar-btn-signup-text: $color-palette-purple-700;
+$navbar-btn-signup-border: 2px solid $color-palette-purple-700;
+
+// Navbar Utility Items
+$navbar-item-margin: $spacing-sm;
+$navbar-cart-margin: $spacing-md;
+$navbar-cart-size: 1.4rem;
+$navbar-cart-color: $color-palette-purple-700;
+
+// Products
+// -------------------------------------------------------------------------
+$product-image-min-height: 250px;
+$product-card-border-radius: 20px;
+$product-price-color: $color-palette-purple-900;

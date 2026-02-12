@@ -1,0 +1,24 @@
+version: '3.8'
+
+# Fichier override pour le développement
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    environment:
+      APP_ENV: dev
+      APP_DEBUG: 1
+    volumes:
+      # Monte tout le code en temps réel
+      - ./:/var/www/html
+      # Exclut les vendors et node_modules pour la performance
+      - /var/www/html/vendor
+      - /var/www/html/node_modules
+
+  nginx:
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/dev.conf:/etc/nginx/conf.d/default.conf

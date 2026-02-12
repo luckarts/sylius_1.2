@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="{{ app.request.locale|slice(0, 2) }}">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>
+			{% block title %}Pétales & Prestige
+			{% endblock %}
+		</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"> {% block metatags %}{% endblock %}
+
+		{% block stylesheets %}
+			{% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/shop/css/style.css'} %}
+			{% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/shop/css/custom.css'} %}
+			{{ sonata_block_render_event('sylius.shop.layout.stylesheets') }}
+		{% endblock %}
+
+		{{ sonata_block_render_event('sylius.shop.layout.head') }}
+	</head>
+
+	<body>
+		{{ sonata_block_render_event('sylius.shop.layout.before_body') }}
+
+		{% include '@SyliusShop/_partials/_navbar.html.twig' %}
+
+		<div class="container main-container">
+			{% include '@SyliusShop/_flashes.html.twig' %}
+
+			{{ sonata_block_render_event('sylius.shop.layout.before_content') }}
+
+			{% block content %}{% endblock %}
+
+			{{ sonata_block_render_event('sylius.shop.layout.after_content') }}
+
+		</div>
+
+		{% block footer %}
+			<div class="container">
+				<p>&copy;
+					{{ 'now'|date('Y') }}
+					Pétales & Prestige</p>
+			</div>
+		{% endblock %}
+
+		{% block javascripts %}
+			{% include '@SyliusUi/_javascripts.html.twig' with {'path': 'assets/shop/js/app.js'} %}
+			{{ sonata_block_render_event('sylius.shop.layout.javascripts') }}
+		{% endblock %}
+
+		{% include '@SyliusUi/Modal/_confirmation.html.twig' %}
+		{{ sonata_block_render_event('sylius.shop.layout.after_body') }}
+	</body>
+</html>

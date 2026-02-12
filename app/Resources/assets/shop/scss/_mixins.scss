@@ -1,0 +1,60 @@
+@mixin overlay-label {
+  position: absolute;
+  bottom: $spacing-xs;
+  right: $spacing-xs;
+  background: $color-overlay-bg;
+  color: white;
+}
+
+@mixin responsive-grid($columns-desktop: 3, $columns-tablet: 2, $columns-mobile: 1) {
+  display: grid;
+  gap: $spacing-md;
+  grid-template-columns: repeat($columns-mobile, 1fr);
+
+  @media (min-width: $breakpoint-mobile) {
+    grid-template-columns: repeat($columns-tablet, 1fr);
+  }
+
+  @media (min-width: $breakpoint-tablet) {
+    grid-template-columns: repeat($columns-desktop, 1fr);
+  }
+}
+
+@mixin card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Theme Generator Mixin
+@mixin theme-vars($theme-name) {
+  $theme: map-get($themes, $theme-name);
+
+  @each $key, $value in $theme {
+    --color-#{$key}: #{$value};
+  }
+}
+
+// Breakpoint Mixin
+@mixin media-breakpoint-up($breakpoint) {
+  @if $breakpoint ==md {
+    @media (min-width: $breakpoint-mobile) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==lg {
+    @media (min-width: $breakpoint-tablet) {
+      @content;
+    }
+  }
+
+  @else {
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  }
+}
